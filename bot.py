@@ -8,13 +8,13 @@ TOKEN = "8264392446:AAGLBjQE1KfBB3zRQ0LV-qm_j6CD9yJ0_F8"
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"Your ID: {update.message.from_user.id}")
-    '''await update.message.reply_text(
+    
+    await update.message.reply_text(
         "/salary 10000\n"
         "/limit 500 3000\n"
         "200 food\n"
         "/balance"
-    )'''
+    )
 
 
 async def set_salary_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
