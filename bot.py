@@ -17,15 +17,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-async def set_salary_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.message.from_user
-    user_id = user.id
-    register_user(user_id, user.username or "user")
+async def set_salary_command(update, context):
+    if len(context.args) == 0:
+        await update.message.reply_text(
+            "Usage: /setsalary 50000"
+        )
+        return
 
-    amount = int(context.args[0])
-    set_salary(user_id, amount)
+    try:
+        amount = int(context.args[0])
 
-    await update.message.reply_text("💰 Salary set & expenses cleared")
+        await update.message.reply_text(
+            f"Salary set to ₹{amount}"
+        )
+
+    except ValueError:
+        await update.message.reply_text(
+            "Please enter a valid number."
+        )
 
 
 async def set_limit(update: Update, context: ContextTypes.DEFAULT_TYPE):
