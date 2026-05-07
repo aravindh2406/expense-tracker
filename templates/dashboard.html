@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>💰 Expense Tracker</h1>
+    </div>
+
+    <!-- BALANCE CARD -->
+    <div class="card balance-card">
+        <h2>Available Balance</h2>
+        <h1 class="balance">₹{{ balance }}</h1>
+    </div>
+
+    <!-- INFO CARDS -->
+    <div class="grid">
+
+        <div class="card">
+            <h3>💼 Salary</h3>
+            <p>₹{{ salary }}</p>
+        </div>
+
+        <div class="card">
+            <h3>📅 Daily Spent</h3>
+            <p>₹{{ daily_spent }}</p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Weekly Spent</h3>
+            <p>₹{{ weekly_spent }}</p>
+        </div>
+
+        <div class="card">
+            <h3>⚙️ Limits</h3>
+            <p>Daily: ₹{{ daily_limit }}</p>
+            <p>Weekly: ₹{{ weekly_limit }}</p>
+        </div>
+
+    </div>
+
+    <!-- ALERT -->
+    {% if alert %}
+    <div class="alert">
+        {{ alert }}
+    </div>
+    {% endif %}
+
+    <!-- FORMS -->
+    <div class="grid">
+
+        <!-- Set Salary -->
+        <div class="card">
+            <h3>Set Salary</h3>
+            <form method="post" action="/set_salary">
+                <input type="number" name="salary" placeholder="Enter salary" required>
+                <button>Update</button>
+            </form>
+        </div>
+
+        <!-- Set Limits -->
+        <div class="card">
+            <h3>Set Limits</h3>
+            <form method="post" action="/set_limits">
+                <input type="number" name="daily" placeholder="Daily limit" required>
+                <input type="number" name="weekly" placeholder="Weekly limit" required>
+                <button>Update</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- EXPENSE LIST -->
+    <div class="card">
+        <h3>📜 Expenses</h3>
+
+        {% for e in expenses %}
+        <div class="expense">
+            <div>
+                <strong>₹{{ e[0] }}</strong> - {{ e[1] }}
+            </div>
+            <div class="date">{{ e[2] }}</div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
